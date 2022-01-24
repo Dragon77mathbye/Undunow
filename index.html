@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Undunow</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="setExampleGame.js"></script>
+    <script>
+        function shuffle(array) {
+            let foo = [];
+            let output = [];
+            for (let i = 0; i < array.length; i++) {
+                const randomIndex = ~~(Math.random() * array.length);
+                if (!foo.includes(randomIndex)) {
+                    foo[i] = randomIndex;
+                    output[foo[i]] = array[i];
+                } else {
+                    i--;
+                }
+            }
+            return output;
+        }
+
+        if (game.shuffle === undefined || game.shuffle) game.questions = shuffle(game.questions);
+        for (let i = 0; i < game.questions.length; i++) if (game.questions[i].shuffle === undefined || game.questions[i].shuffle) game.questions[i].answers = shuffle(game.questions[i].answers);
+    </script>
+</head>
+<body>
+<div id="uploadGame" style="text-align: center;">
+    <h1>Upload Game</h1>
+    <label for="importFile" id="importFileLabel"
+           style="height: 20px; width: 300px; position: relative; left: 50%; margin-left: -150px; display: block;">
+        Upload game here!
+    </label>
+    <button onclick='document.getElementById("uploadGame").style.display = "none"; document.getElementById("startScreen").style.display = "";'>
+        Or, use the example
+    </button>
+    <input id="importFile" type="file" accept="application/json" onchange="loadGame(this.files[0]);">
+    <button onclick="document.getElementById('gameCreator').style.display = ''; document.getElementById('uploadGame').style.display = 'none';">
+        Game Creator
+    </button>
+</div>
+<div id="startScreen" style="display: none; height: 90vh;">
+    <button onclick="start();" style="height: 100%; font-size: 250px; border-radius: 100vw;">Start</button>
+</div>
+<div id="game" style="display: none;">
+    <div id="stats" class="stats" style="max-width: 10%; font-size: 1vw; overflow: hidden;">
+        <p id="score">Score: 0</p>
+        <p id="questionNumber">0/0</p>
+        <p id="correct" style="color: #0a0;">Correct: 0</p>
+        <p id="incorrect" style="color: #a00;">Incorrect: 0</p>
+        <p id="unanswered" style="color: #aaa;">Unanswered: 0</p>
+        <p id="accuracyStats" style="color: #aaa;">Accuracy: ???</p>
+        <p id="streak" style="color: #0aa;">Current Streak: 0</p>
+        <img src="fire.gif" alt="fire" id="fire" style="top: 60%;">
+    </div>
+    <label for="timer" id="timerText">60.0s</label>
+    <progress id="timer" max="10000" value="10000"></progress>
+    <div id="questions">
+
+    </div>
+    <div id="answerScreen" style="display: none;">
+        <h1 id="isCorrect">Correct!</h1>
+        <div id="addScoreDiv" class="scoreDiv">
+            <h2 id="addScore" class="score">+0</h2>
+        </div>
+        <button onclick="nextQuestion(questionNum + 1);">Next Question</button>
+    </div>
+</div>
+<div id="endScreen" style="display: none; color: white;">
+    <h1>All Done!</h1>
+    <p id="accuracy">Accuracy: 0/0</p>
+    <p id="accuracyMessage">If you see this, something went wrong!</p>
+</div>
+<div id="gameCreator" style="display: none;">
+    <button onclick="const imported = JSON.parse(prompt('Paste JSON contents here.')); gc.questions = imported.questions; gc.shuffle = imported.shuffle; gc.refresh();"
+            class="backBtn" style="position: fixed; right: 0;">Import
+    </button>
+    <button onclick="leaveGameCreator();" class="backBtn" style="position: fixed;">Back</button>
+    <div id="gc" style="text-align: center;">
+        <button onclick="gc.addQuestion('single');"
+                style="width: 60%; left: 20%; position: fixed; min-height: 24px; top: 10px;">New Multiple Choice
+            Question
+        </button>
+        <button onclick="gc.addQuestion('text');"
+                style="width: 60%; left: 20%; position: fixed; min-height: 24px; top: 40px;">New Text/Typing Question
+        </button>
+        <button onclick="gc.addQuestion('number');"
+                style="width: 60%; left: 20%; position: fixed; min-height: 24px; top: 70px;">New Number Question
+        </button>
+        <p class="blueHover"
+           onclick="gc.shuffle = !gc.shuffle; document.getElementById('shuffleQuestions').innerText = `${!gc.shuffle ? 'Not' : ''} Shuffling Questions`; gc.refresh();"
+           id="shuffleQuestions">Shuffling Questions</p>
+    </div>
+    <div class="stats gcOutput" id="output">
+        <textarea id="output2" onclick="gc.savedRecently = true;"
+                  onchange="this.style.height = `${this.scrollHeight}px`;" style="white-space: nowrap;"></textarea>
+    </div>
+</div>
+<script src="main.js"></script>
+<script src="gameCreator.js"></script>
+<script src="toNumberName.js"></script>
+</body>
+</html>

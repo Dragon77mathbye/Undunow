@@ -1,0 +1,55 @@
+{
+  "shuffle": false,
+  "__comment": "This shuffle key will make it so that it will shuffle the question. Set to true by default.",
+  "questions": [
+    {
+      "text": "This is how you make questions! This will be the text that the question uses.",
+      "answers": [
+        {
+          "text": "Wrong Answer",
+          "correct": false
+        },
+        {
+          "text": "Right Answer",
+          "correct": true
+        }
+      ],
+      "shuffle": false,
+      "__comment": "Shuffle, by default, is set to true. You don't need to put it in there if you want it to shuffle."
+    },
+    {
+      "type": "text",
+      "text": "Example typing question. You have to type your answer. The answers are not case sensitive.",
+      "answers": [
+        "this",
+        "is",
+        "how",
+        "you",
+        "make",
+        "answers",
+        "for",
+        "a",
+        "typing",
+        "question"
+      ]
+    },
+    {
+      "type": "number",
+      "text": "Example number question. You have to type your answer, but it has to be a number.",
+      "answers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "penalty": 15000000
+    }
+  ]
+}
