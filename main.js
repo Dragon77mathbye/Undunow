@@ -11,8 +11,11 @@ let streak = 0;
 
 async function loadGame(gameFile) {
     document.getElementById("uploadGame").style.display = "none";
+	document.getElementById("gameCreator").style.display = "none";
     document.getElementById("startScreen").style.display = "";
     game = JSON.parse(await gameFile.text());
+	if (game.questions === undefined || game.questions === null) game.questions = [];
+	if (game.shuffle === undefined || game.shuffle === null) game.shuffle = true;
     totalQuestions = game.questions.length;
     if (game.shuffle === undefined || game.shuffle) game.questions = shuffle(game.questions);
     for (let i = 0; i < game.questions.length; i++) if (game.questions[i].shuffle === undefined || game.questions[i].shuffle) game.questions[i].answers = shuffle(game.questions[i].answers);

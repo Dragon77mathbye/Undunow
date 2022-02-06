@@ -26,17 +26,17 @@
     </script>
 </head>
 <body>
-<div id="uploadGame" style="text-align: center;">
+<div id="uploadGame" style="text-align: center; width: 100%;">
     <h1>Upload Game</h1>
     <label for="importFile" id="importFileLabel"
-           style="height: 20px; width: 300px; position: relative; left: 50%; margin-left: -150px; display: block;">
-        Upload game here!
+           style="height: 70px; width: 25%; margin-left: 37.5%; display: block; border-width: 2px; font-size: 125%;">
+        <span style="position: relative; top: 20px; white-space: nowrap;">Upload game here!</span>
     </label>
-    <button onclick='document.getElementById("uploadGame").style.display = "none"; document.getElementById("startScreen").style.display = "";'>
-        Or, use the example
+    <button onclick='document.getElementById("uploadGame").style.display = "none"; document.getElementById("startScreen").style.display = "";' class='halfWidth'>
+        Use the example
     </button>
     <input id="importFile" type="file" accept="application/json" onchange="loadGame(this.files[0]);">
-    <button onclick="document.getElementById('gameCreator').style.display = ''; document.getElementById('uploadGame').style.display = 'none';">
+    <button onclick="document.getElementById('gameCreator').style.display = ''; document.getElementById('uploadGame').style.display = 'none';" class='halfWidth'>
         Game Creator
     </button>
 </div>
@@ -71,11 +71,10 @@
     <h1>All Done!</h1>
     <p id="accuracy">Accuracy: 0/0</p>
     <p id="accuracyMessage">If you see this, something went wrong!</p>
+	<button onclick="document.getElementById('endScreen').style.display = 'none'; document.getElementById('uploadGame').style.display = ''; document.getElementById('questions').style.display = ''; document.getElementById('timer').style.display = ''; document.getElementById('timerText').style.display = ''; document.getElementById('game').style.display = 'none'; correctAnswers = 0; incorrect = 0; unanswered = 0; streak = 0; score = 0; questionNum = 0; document.body.style.background = '#b0f';">Back</button>
 </div>
 <div id="gameCreator" style="display: none;">
-    <button onclick="const imported = JSON.parse(prompt('Paste JSON contents here.')); gc.questions = imported.questions; gc.shuffle = imported.shuffle; gc.refresh();"
-            class="backBtn" style="position: fixed; right: 0;">Import
-    </button>
+    <button onclick="const g = {text: () => {return document.getElementById('output2').value;}}; loadGame(g);" class="backBtn" style="position: fixed; right: 0;">Try</button>
     <button onclick="leaveGameCreator();" class="backBtn" style="position: fixed;">Back</button>
     <div id="gc" style="text-align: center;">
         <button onclick="gc.addQuestion('single');"
@@ -94,7 +93,7 @@
     </div>
     <div class="stats gcOutput" id="output">
         <textarea id="output2" onclick="gc.savedRecently = true;"
-                  onchange="this.style.height = `${this.scrollHeight}px`;" style="white-space: nowrap;"></textarea>
+                  onchange="gc.questions = JSON.parse(this.value).questions !== undefined ? JSON.parse(this.value).questions : []; gc.shuffle = JSON.parse(this.value).shuffle !== undefined ? JSON.parse(this.value).shuffle : true; gc.refresh(); this.style.height = `${this.scrollHeight}px`;" style="white-space: nowrap;"></textarea>
     </div>
 </div>
 <script src="main.js"></script>

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 button, #importFileLabel {
     position: center;
@@ -9,12 +10,13 @@ button, #importFileLabel {
     background-color: white;
     border-style: solid;
     border-color: black;
-    font-family: Montserrat, sans-serif;
+    font-family: Nunito, sans-serif;
     transition: background-color 250ms, border-color 250ms;
     transition-timing-function: ease;
     display: table-cell;
     vertical-align: middle;
     text-align: justify-all;
+	cursor: pointer;
 }
 
 #importFileLabel {
@@ -39,7 +41,7 @@ input[type=text], input[type=number] {
 }
 
 body {
-    font-family: sans-serif;
+    font-family: Nunito, sans-serif;
     background: #b0f;
     text-align: right;
     color: #fff;
@@ -88,7 +90,7 @@ progress::-webkit-progress-value {
     font-size: 24px;
     display: inline;
     color: gray;
-    font-family: Montserrat, sans-serif;
+    font-family: Nunito, sans-serif;
 }
 
 #timer {
@@ -151,7 +153,7 @@ input[type="file"] {
     font-size: 24px;
     background-color: #000;
     border-radius: 15px;
-    font-family: Montserrat, sans-serif;
+    font-family: Nunito, sans-serif;
     text-align: center;
     width: 240px;
     transition: opacity 150ms ease;
@@ -211,6 +213,7 @@ input[type="file"] {
 textarea {
     background: #000;
     color: #fff;
+	width: 90%;
 }
 
 #output2 {
@@ -225,4 +228,8 @@ textarea {
     bottom: 8px;
     right: 8px;
     font-size: 16px;
+}
+
+.halfWidth {
+	width: 49.5%;
 }
